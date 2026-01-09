@@ -11,8 +11,11 @@ the app on Streamlit Community Cloud (FREE)
 
 ## 2. Dataset
 **Source:** Kaggle - Heart Disease Dataset
+
 **Objects:** 
+
 **Features:** 
+
 **Target:**
 
 ## 3. Model
