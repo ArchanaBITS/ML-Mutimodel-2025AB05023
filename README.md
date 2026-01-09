@@ -1,5 +1,5 @@
 # Multimodal Classification & Model Comparison
-### 2025AB05023 ML Assignment 2 
+### ML Assignment 2 
 
 **Name :** S.ARCHANA
 **ID :** 2025AB05023
