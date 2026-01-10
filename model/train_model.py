@@ -21,7 +21,7 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 
 # Define the 6 models
-models = {
+model = {
     "logistic_reg": LogisticRegression(),
     "decision_tree": DecisionTreeClassifier(),
     "knn": KNeighborsClassifier(),
@@ -31,7 +31,7 @@ models = {
 }
 
 # Train and Save each model
-for name, model in models.items():
+for name, model in model.items():
     model.fit(X_train, y_train)
     joblib.dump(model, f'{name}.pkl')
     print(f"Saved {name}.pkl")
