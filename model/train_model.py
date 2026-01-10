@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestClassifier
 import xgboost as xgb
 
 # Load your dataset (Ensure it has >12 features and >500 rows)
-df = pd.read_csv('../data/your_dataset.csv') 
+df = pd.read_csv('data/heart.csv') 
 X = df.drop('target_column', axis=1)
 y = df['target_column']
 
