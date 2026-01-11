@@ -29,4 +29,25 @@ the app on Streamlit Community Cloud (FREE)
 ## 4. UI
 Streamlit
 
-## 5. Model Observation
+## 5. Evaluation Metrics
+
+| ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Logistic Regression** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| **Decision Tree** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| **kNN** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| **Naive Bayes** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| **Random Forest (Ensemble)** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| **XGBoost (Ensemble)** | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+
+## 6. Observations About Model Performance
+
+| ML Model Name | Observation about model performance |
+| :--- | :--- |
+| **Logistic Regression** |  |
+| **Decision Tree** |  |
+| **kNN** |  |
+| **Naive Bayes** |  |
+| **Random Forest (Ensemble)** |  |
+| **XGBoost (Ensemble)** |  |
+
