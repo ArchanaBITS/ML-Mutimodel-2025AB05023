@@ -8,11 +8,12 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 import xgboost as xgb
+import os
 
 # Load your dataset (Ensure it has >12 features and >500 rows)
 df = pd.read_csv('data/heart.csv') 
-X = df.drop('target_column', axis=1)
-y = df['target_column']
+X = df.drop('target', axis=1)
+y = df['target']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -29,9 +30,13 @@ model = {
     "random_forest": RandomForestClassifier(),
     "xgboost": xgb.XGBClassifier()
 }
-
+model_dir = 'model'
 # Train and Save each model
 for name, model in model.items():
     model.fit(X_train, y_train)
-    joblib.dump(model, f'{name}.pkl')
-    print(f"Saved {name}.pkl")
+# Define the save path inside the 'model' folder
+    file_path = os.path.join(model_dir, f"{name}.pkl")
+    
+    # Save the model
+    joblib.dump(model, file_path)
+    print(f"Successfully saved: {file_path}")
