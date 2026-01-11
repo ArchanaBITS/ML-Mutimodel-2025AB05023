@@ -28,6 +28,7 @@ the app on Streamlit Community Cloud (FREE)
 
 ## 4. UI
 Streamlit
+Streamlit Link : https://ml-mutimodel-2025ab05023-wkqmzs6wqcldimq7vpheiv.streamlit.app/
 
 ## 5. Evaluation Metrics
 
