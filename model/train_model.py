@@ -56,7 +56,11 @@ models_dict = {
     "decision_tree": DecisionTreeClassifier(),
     "knn": KNeighborsClassifier(),
     "naive_bayes": GaussianNB(),
-    "random_forest": RandomForestClassifier(),
+    "random_forest": RandomForestClassifier(
+    n_estimators=100,    # Number of trees
+    max_depth=10,        # Limit depth (reduces file size drastically)
+    min_samples_leaf=5   # Prevents over-complex trees
+    ),
     "xgboost": xgb.XGBClassifier()
 }
 
