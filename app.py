@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import os
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, classification_report
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, roc_auc_score, classification_report
 
 st.set_page_config(page_title="Bank Marketing Analysis", layout="wide")
 st.sidebar.header("Model Selection")
@@ -55,16 +55,24 @@ if uploaded_file is not None:
             model_path = os.path.join('model', f"{selected_model_name}.pkl")
             model = joblib.load(model_path)
             y_pred = model.predict(X_test_scaled)
-
+            
+            # AUC requires the probability of the positive class (1)
+            if hasattr(model, "predict_proba"):
+               y_probs = model.predict_proba(X_test_scaled)[:, 1]
+               auc_score = roc_auc_score(y_test, y_probs)
+            else:
+            # Some models like LinearSVC don't have predict_proba by default
+               auc_score = 0.0
             # --- EVALUATION ---
             st.subheader(f"📊 Results for {selected_model_name}")
-            m1, m2, m3, m4, m5 = st.columns(5)
+            m1, m2, m3, m4, m5, m6 = st.columns(6)
             
             m1.metric("Accuracy", f"{accuracy_score(y_test, y_pred):.2f}")
             m2.metric("Precision", f"{precision_score(y_test, y_pred, zero_division=0):.2f}")
             m3.metric("Recall", f"{recall_score(y_test, y_pred, zero_division=0):.2f}")
             m4.metric("F1 Score", f"{f1_score(y_test, y_pred, zero_division=0):.2f}")
             m5.metric("MCC", f"{matthews_corrcoef(y_test, y_pred):.2f}")
+            m6.metric("AUC", f"{roc_auc_score(y_test, y_pred):.2f}")
 
             with st.expander("View Full Classification Report"):
                 report = classification_report(y_test, y_pred, output_dict=True)
