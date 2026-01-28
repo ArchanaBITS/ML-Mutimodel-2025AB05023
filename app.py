@@ -45,9 +45,9 @@ if uploaded_file is not None:
     test_df = pd.read_csv(uploaded_file)
     
     # Ensure 'target' exists to calculate metrics
-    if 'target' in test_df.columns:
-        X_test = test_df.drop('target', axis=1)
-        y_test = test_df['target']
+    if 'y' in test_df.columns:
+        X_test = test_df.drop('y', axis=1)
+        y_test = test_df['y']
         
         # NOTE: For better accuracy, you should load the scaler saved from training
         # instead of fitting a new one on test data.
