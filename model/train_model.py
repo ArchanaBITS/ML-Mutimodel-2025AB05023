@@ -67,7 +67,7 @@ models_dict = {
 for name, m in models_dict.items():
     m.fit(X_train_scaled, y_train)
     file_path = os.path.join('model', f"{name}.pkl")
-    joblib.dump(m, file_path)
+    joblib.dump(m, file_path, compress=3)
     print(f"Successfully saved: {file_path}")
 
 print("✨ Training complete! All files saved in 'model/' and 'data/'.")
