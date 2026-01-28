@@ -14,16 +14,16 @@ import os
 os.makedirs('data', exist_ok=True)
 os.makedirs('model', exist_ok=True)
 
-# 1. Load data
+# Load data
 df = pd.read_csv('data/bank-full.csv', sep=';') 
 
-# 2. Map target 'y' to 1/0
+# Map target 'y' to 1/0 - One-Hot Encoding Target
 df['y'] = df['y'].str.strip().map({'yes': 1, 'no': 0})
 df = df.dropna(subset=['y'])
 
-# --- STEP 3: SPLIT RAW DATA FIRST ---
+# SPLIT DATA FIRST
 # We split before encoding so 'test.csv' stays readable (17 columns)
-train_raw, test_raw = train_test_split(df, test_size=0.2, random_state=42)
+train_bef, test_bef = train_test_split(df, test_size=0.2, random_state=42)
 
 # 3. Convert text to numbers
 df_encoded = pd.get_dummies(df)
@@ -39,7 +39,7 @@ joblib.dump(X.columns.tolist(), 'model/model_columns.pkl')
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 5. Save CSVs
-test_raw.to_csv('data/test.csv', index=False)
+test_bef.to_csv('data/test.csv', index=False)
 train_df = pd.concat([X_train, y_train], axis=1)
 test_df = pd.concat([X_test, y_test], axis=1)
 train_df.to_csv('data/train.csv', index=False)
