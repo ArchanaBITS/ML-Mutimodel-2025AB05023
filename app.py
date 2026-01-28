@@ -11,7 +11,7 @@ model_options = ["logistic_reg", "decision_tree", "knn", "naive_bayes", "random_
 selected_model_name = st.sidebar.selectbox("Choose ML Model", model_options)
 st.title("🏦 Bank Marketing Model Analysis")
 
-# --- STEP 1: DOWNLOAD ---
+# DOWNLOAD TEST
 st.header("1. Get Test Data")
 test_path = 'data/test.csv'
 if os.path.exists(test_path):
@@ -26,7 +26,7 @@ if os.path.exists(test_path):
 else:
     st.error("The file 'data/test.csv' was not found. Please run your training script first.")
 
-# --- STEP 2: UPLOAD & PREDICT ---
+# UPLOAD & PREDICT
 st.header("2. Upload & Predict")
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
@@ -38,11 +38,10 @@ if uploaded_file is not None:
         X_test = test_df.drop('y', axis=1)
 
         # --- PREPROCESSING ---
-        # 1. One-Hot Encoding
+        # One-Hot Encoding
         X_test_encoded = pd.get_dummies(X_test)
 
-        # 2. Match Columns with Training Data
-        # (This ensures if a category is missing in the upload, it's added as 0)
+        # Match Columns with Training Data
         try:
             model_cols = joblib.load('model/model_columns.pkl')
             X_test_final = X_test_encoded.reindex(columns=model_cols, fill_value=0)
