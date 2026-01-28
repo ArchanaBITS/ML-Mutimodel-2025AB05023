@@ -39,10 +39,10 @@ joblib.dump(X.columns.tolist(), 'model/model_columns.pkl')
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 5. Save CSVs
+test_raw.to_csv('data/test.csv', index=False)
 train_df = pd.concat([X_train, y_train], axis=1)
 test_df = pd.concat([X_test, y_test], axis=1)
 train_df.to_csv('data/train.csv', index=False)
-test_df.to_csv('data/test.csv', index=False)
 
 # 6. Scaling
 scaler = StandardScaler()
