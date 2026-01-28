@@ -10,13 +10,13 @@ Project is to Implement multiple classification models - Build an interactive St
 the app on Streamlit Community Cloud (FREE) 
 
 ## 2. Dataset
-**Source:** Kaggle - Heart Disease Dataset
+**Source:** UCI - Bank Marketing Dataset
 
-**Objects:** 
+**Objects:** 45,211 Instances
 
-**Features:** 
+**Features:** 17-20 Features
 
-**Target:**
+**Target:** y
 
 ## 3. Model
 - Logistic Regression
