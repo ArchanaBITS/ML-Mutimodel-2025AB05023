@@ -13,9 +13,20 @@ model_options = ["logistic_reg", "decision_tree", "knn", "naive_bayes", "random_
 selected_model_name = st.sidebar.selectbox("Choose ML Model", model_options)
 st.title("Bank Marketing Model Analysis")
 
-##Upload Test File
-st.subheader("Upload Test Data")
-uploaded_file = st.file_uploader("Upload your test CSV file", type="csv")
+# --- STEP 1: DOWNLOAD ---
+st.header("1. Get Test Data")
+if os.path.exists('test.csv'):
+    with open("test.csv", "rb") as file:
+        st.download_button(
+            label="Download test.csv",
+            data=file,
+            file_name="test_data_for_prediction.csv",
+            mime="text/csv"
+        )
+
+# --- STEP 2: UPLOAD ---
+st.header("2. Upload & Predict")
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
 ##Model Load
 Model_Dir = 'model'
