@@ -45,7 +45,7 @@ Streamlit Link : https://ml-mutimodel-2025ab05023-wkqmzs6wqcldimq7vpheiv.streaml
 
 | ML Model Name | Observation about model performance |
 | :--- | :--- |
-| **Logistic Regression** |  |
+| **Logistic Regression** | It provides a very stable but "safe" prediction. While accuracy is high, it often misses complex patterns between age and balance, usually resulting in a lower Recall for the actual subscribers. |
 | **Decision Tree** |  |
 | **kNN** |  |
 | **Naive Bayes** |  |
