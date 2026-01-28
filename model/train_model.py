@@ -21,6 +21,10 @@ df = pd.read_csv('data/bank-full.csv', sep=';')
 df['y'] = df['y'].str.strip().map({'yes': 1, 'no': 0})
 df = df.dropna(subset=['y'])
 
+# --- STEP 3: SPLIT RAW DATA FIRST ---
+# We split before encoding so 'test.csv' stays readable (17 columns)
+train_raw, test_raw = train_test_split(df, test_size=0.2, random_state=42)
+
 # 3. Convert text to numbers
 df_encoded = pd.get_dummies(df)
 
@@ -29,9 +33,9 @@ X = df_encoded.drop('y', axis=1)
 y = df_encoded['y']
 
 # Save column names (CRITICAL for Streamlit consistency)
-# 
 joblib.dump(X.columns.tolist(), 'model/model_columns.pkl')
 
+# Re-split the encoded data for training
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # 5. Save CSVs
