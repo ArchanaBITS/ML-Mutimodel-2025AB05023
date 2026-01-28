@@ -11,11 +11,14 @@ import xgboost as xgb
 import os
 
 # Load your dataset (Ensure it has >12 features and >500 rows)
-df = pd.read_csv('data/heart.csv') 
+df = pd.read_csv('data/bank_full.csv') 
 X = df.drop('target', axis=1)
 y = df['target']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Save them as CSVs
+train.to_csv('train.csv', index=False)
+test.to_csv('test.csv', index=False)
 
 # Scaling
 scaler = StandardScaler()
