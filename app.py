@@ -72,7 +72,7 @@ if uploaded_file is not None:
             m3.metric("Recall", f"{recall_score(y_test, y_pred, zero_division=0):.2f}")
             m4.metric("F1 Score", f"{f1_score(y_test, y_pred, zero_division=0):.2f}")
             m5.metric("MCC", f"{matthews_corrcoef(y_test, y_pred):.2f}")
-            m6.metric("AUC", f"{roc_auc_score(y_test, y_pred):.2f}")
+            m6.metric("AUC", f"{roc_auc_score(y_test, y_probs):.2f}")
 
             with st.expander("View Full Classification Report"):
                 report = classification_report(y_test, y_pred, output_dict=True)
