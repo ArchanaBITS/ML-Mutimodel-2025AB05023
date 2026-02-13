@@ -52,16 +52,38 @@ joblib.dump(scaler, 'model/scaler.pkl')
 
 # 7. Train and Save models
 models_dict = {
-    "logistic_reg": LogisticRegression(max_iter=1000),
-    "decision_tree": DecisionTreeClassifier(),
-    "knn": KNeighborsClassifier(),
+    "logistic_reg": LogisticRegression(
+        max_iter=2000, 
+        C=1.0, 
+        class_weight='balanced', 
+        random_state=42
+    ),
+    "decision_tree": DecisionTreeClassifier(
+        max_depth=15, 
+        min_samples_split=10, 
+        random_state=42
+    ),
+    "knn": KNeighborsClassifier(
+        n_neighbors=5, 
+        weights='distance', 
+        metric='euclidean'
+    ),
     "naive_bayes": GaussianNB(),
     "random_forest": RandomForestClassifier(
-    n_estimators=100,    # Number of trees
-    max_depth=10,        # Limit depth (reduces file size drastically)
-    min_samples_leaf=5   # Prevents over-complex trees
+        n_estimators=100,
+        max_depth=10,
+        min_samples_leaf=5,
+        n_jobs=-1,        # Uses all CPU cores for faster training
+        random_state=42   # Ensures consistent results every run
     ),
-    "xgboost": xgb.XGBClassifier()
+    "xgboost": xgb.XGBClassifier(
+        n_estimators=100,
+        learning_rate=0.1,
+        max_depth=6,
+        use_label_encoder=False,
+        eval_metric='logloss',
+        random_state=42
+    )
 }
 
 for name, m in models_dict.items():
