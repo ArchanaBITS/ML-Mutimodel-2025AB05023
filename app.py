@@ -64,14 +64,14 @@ if uploaded_file is not None:
                auc_score = 0.0
             # --- EVALUATION ---
             st.subheader(f"📊 Results for {selected_model_name}")
-            m1, m2, m3, m4, m5, m6 = st.columns(6)
+            model1, model2, model3, model4, model5, model6 = st.columns(6)
             
-            m1.metric("Accuracy", f"{accuracy_score(y_test, y_pred):.2f}")
-            m2.metric("Precision", f"{precision_score(y_test, y_pred, zero_division=0):.2f}")
-            m3.metric("Recall", f"{recall_score(y_test, y_pred, zero_division=0):.2f}")
-            m4.metric("F1 Score", f"{f1_score(y_test, y_pred, zero_division=0):.2f}")
-            m5.metric("MCC", f"{matthews_corrcoef(y_test, y_pred):.2f}")
-            m6.metric("AUC", f"{roc_auc_score(y_test, y_probs):.2f}")
+            model1.metric("Accuracy", f"{accuracy_score(y_test, y_pred):.2f}")
+            model2.metric("Precision", f"{precision_score(y_test, y_pred, zero_division=0):.2f}")
+            model3.metric("Recall", f"{recall_score(y_test, y_pred, zero_division=0):.2f}")
+            model4.metric("F1 Score", f"{f1_score(y_test, y_pred, zero_division=0):.2f}")
+            model5.metric("MCC", f"{matthews_corrcoef(y_test, y_pred):.2f}")
+            model6.metric("AUC", f"{roc_auc_score(y_test, y_probs):.2f}")
 
             with st.expander("View Full Classification Report"):
                 report = classification_report(y_test, y_pred, output_dict=True)
