@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
 import os
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, roc_auc_score, classification_report
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, roc_auc_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 
 st.set_page_config(page_title="Bank Marketing Analysis", layout="wide")
 st.sidebar.header("Model Selection")
@@ -75,6 +75,17 @@ if uploaded_file is not None:
             model5.metric("MCC", f"{matthews_corrcoef(y_test, y_pred):.2f}")
             model6.metric("AUC", f"{roc_auc_score(y_test, y_probs):.2f}")
             
+            # --- VISUALIZATIONS ---
+            col_left, col_right = st.columns(2)
+
+            with col_left:
+                # Confusion Matrix
+                st.subheader("📉 Confusion Matrix")
+                cm = confusion_matrix(y_test, y_pred)
+                fig_cm, ax_cm = plt.subplots()
+                ConfusionMatrixDisplay(confusion_matrix=cm).plot(ax=ax_cm, cmap='Blues')
+                st.pyplot(fig_cm)
+
             if hasattr(model, "feature_importances_"):
                st.subheader("🌲 Feature Importance")
     
@@ -89,7 +100,7 @@ if uploaded_file is not None:
             with st.expander("View Full Classification Report"):
                 report = classification_report(y_test, y_pred, output_dict=True)
                 st.dataframe(pd.DataFrame(report).transpose())
-
+                
         except FileNotFoundError as e:
             st.error(f"Missing required file: {e}")
     else:
