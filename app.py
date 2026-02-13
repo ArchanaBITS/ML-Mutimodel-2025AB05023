@@ -76,7 +76,7 @@ if uploaded_file is not None:
             model6.metric("AUC", f"{roc_auc_score(y_test, y_probs):.2f}")
             
             # --- VISUALIZATIONS ---
-            col_left = st.columns(2)
+            col_left = st.columns(1)[0]
 
             with col_left:
                 # Confusion Matrix
