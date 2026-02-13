@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 import joblib
 import os
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, roc_auc_score, classification_report
@@ -72,7 +74,18 @@ if uploaded_file is not None:
             model4.metric("F1 Score", f"{f1_score(y_test, y_pred, zero_division=0):.2f}")
             model5.metric("MCC", f"{matthews_corrcoef(y_test, y_pred):.2f}")
             model6.metric("AUC", f"{roc_auc_score(y_test, y_probs):.2f}")
-
+            
+            if hasattr(model, "feature_importances_"):
+               st.subheader("🌲 Feature Importance")
+    
+               # Create a DataFrame for visualization
+               feat_importances = pd.Series(model.feature_importances_, index=X_test_final.columns)
+               top_feats = feat_importances.nlargest(10)
+    
+               fig, ax = plt.subplots()
+               sns.barplot(x=top_feats.values, y=top_feats.index, ax=ax, palette="viridis")
+               ax.set_title(f"Top 10 Features for {selected_model_name}")
+               st.pyplot(fig)
             with st.expander("View Full Classification Report"):
                 report = classification_report(y_test, y_pred, output_dict=True)
                 st.dataframe(pd.DataFrame(report).transpose())
